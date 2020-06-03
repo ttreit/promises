@@ -1,7 +1,7 @@
 /**
  * Create the promise returning `Async` suffixed versions of the functions below,
  * Promisify them if you can, otherwise roll your own promise returning function
- */ 
+ */
 
 var fs = require('fs');
 var request = require('request');
@@ -42,21 +42,29 @@ var generateRandomTokenAsync; // TODO
 
 
 // (3) Asyncronous file manipulation
-var readFileAndMakeItFunny = function(filePath, callback) {
-  fs.readFile(filePath, 'utf8', function(err, file) {
-    if (err) { return callback(err); }
-   
-    var funnyFile = file.split('\n')
-      .map(function(line) {
-        return line + ' lol';
-      })
-      .join('\n');
-
-    callback(funnyFile);
+var readFileAndMakeItFunnyAsync = function (filePath) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filePath, 'utf8', function (err, file) {
+      if (err) {
+        // return callback(err);
+        reject(err);
+      } else {
+        let funnyFile = file
+          .split('\n')
+          .map(function (line) {
+            return line + ' lol';
+          })
+          .join('\n');
+        resolve(funnyFile);
+        // resolve
+        // callback(funnyFile);
+      }
+    });
   });
+
 };
 
-var readFileAndMakeItFunnyAsync; // TODO
+//var readFileAndMakeItFunnyAsync = Promise.promisify(readFileAndMakeItFunny); // TODO
 
 // Export these functions so we can test them and reuse them in later exercises
 module.exports = {
