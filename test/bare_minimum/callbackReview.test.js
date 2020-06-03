@@ -56,7 +56,7 @@ describe('Callback review', function() {
       });
     });
 
-    it.only('should invoke the callback with an error as the first argument', function(done) {
+    it('should invoke the callback with an error as the first argument', function(done) {
       someNonExistantWebsite.get('/').reply(404);
 
       getStatusCode('https::///thisIsNoUrl.comedy', function(err, statusCode) {
