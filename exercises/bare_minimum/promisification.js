@@ -8,6 +8,17 @@ var request = require('request');
 var crypto = require('crypto');
 var Promise = require('bluebird');
 
+// (0) writeFile
+// var writeFile = function(file, data, callback) {
+//   fs.writeFile(file, data, 'utf8', (err) => {
+//     if (err) {
+//       callback(err);
+//     }
+//   })
+// };
+
+// var writeFileAsync = Promise.promisifyAll(writeFile);
+
 // (1) Asyncronous HTTP request
 var getGitHubProfile = function (user, callback) {
   var options = {
@@ -62,7 +73,7 @@ var readFileAndMakeItFunny = function (filePath) {
           .join('\n');
         resolve(funnyFile);
         // resolve
-        // callback(funnyFile);
+        // callback(funnyFile); (null, funnyFile) would be correct b/c it would use error first callback pattern
       }
     });
   });
