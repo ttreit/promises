@@ -66,10 +66,10 @@ var readFileAndMakeItFunny = function (filePath) {
       }
     });
   });
-  
+
 };
 
-var readFileAndMakeItFunnyAsync = Promise.promisify(readFileAndMakeItFunny); // TODO
+var readFileAndMakeItFunnyAsync = Promise.promisifyAll(readFileAndMakeItFunny); // TODO WHY DOES ALL WORK????
 
 // Export these functions so we can test them and reuse them in later exercises
 module.exports = {
